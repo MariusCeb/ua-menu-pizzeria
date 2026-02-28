@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Uà Art&Pizza · Ravenna</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@1,700&display=swap');
+:root{
+  --yellow:#c8813a;
+  --yellow-dark:#a8622a;
+  --yellow-light:#d9965a;
+  --red:#5c3d2e;
+  --red-dark:#3e2618;
+  --orange:#8b6248;
+  --bg:#f5f0e8;
+  --bg2:#ede6d8;
+  --bg3:#faf7f2;
+  --cream:#2c1f14;
+  --cream-dim:rgba(44,31,20,.6);
+  --cream-faint:rgba(44,31,20,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--cream);font-family:'Lato',Helvetica,Arial,sans-serif;overflow-x:hidden;padding-bottom:5rem;padding-top:0;-webkit-overflow-scrolling:touch}
+/* Force light-mode overrides */
+
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:#3e2618;border-bottom:3px solid var(--yellow);padding:0 5vw;height:62px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.04em;color:var(--yellow);text-decoration:none;display:flex;align-items:center;gap:.5rem}.nav-logo span{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--yellow-light)}
+.nav-call{font-family:'Oswald',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#f5f0e8;background:var(--yellow);text-decoration:none;display:flex;align-items:center;gap:.45rem;padding:.5rem 1.1rem;border-radius:3px;border:2px solid var(--yellow-dark);transition:background .2s,transform .15s;white-space:nowrap}.nav-call:hover{background:var(--yellow-dark);transform:scale(1.04)}
+
+/* CAT NAV */
+.cat-nav{position:fixed;top:62px;left:0;right:0;z-index:100;background:#5c3d2e;border-bottom:2px solid var(--yellow-dark);padding:.6rem 5vw;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none}.cat-nav::-webkit-scrollbar{display:none}
+.cat-pill{flex-shrink:0;font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.65);text-decoration:none;border:1px solid rgba(245,240,232,.25);padding:.4rem 1rem;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;border-radius:2px}.cat-pill:hover,.cat-pill.active{background:var(--yellow);color:#f5f0e8;border-color:var(--yellow)}
+
+/* SCROLL TOP */
+.scroll-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;background:var(--red);border:2px solid var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;pointer-events:none}.scroll-top.show{opacity:1;transform:translateY(0);pointer-events:all}.scroll-top:hover{background:var(--yellow)}.scroll-top:hover svg{stroke:var(--red)}
+
+/* HERO */
+.hero{margin-top:0;padding:50px 5vw 50px;background:linear-gradient(160deg,#e8ddc8 0%,var(--bg) 60%);text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 30%,rgba(200,129,58,.12) 0%,transparent 70%)}.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--yellow),var(--orange),var(--yellow),transparent)}
+.hero-spacer{height:118px;display:block}
+.hero-logo-wrap{position:relative;z-index:1;margin-bottom:1.5rem}.hero-logo{width:130px;height:130px;object-fit:contain;filter:drop-shadow(0 8px 30px rgba(200,129,58,.3))}
+.hero-tag{font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--yellow);margin-bottom:.8rem;position:relative;z-index:1}
+.hero-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(3.5rem,12vw,8rem);text-transform:uppercase;line-height:.85;color:var(--cream);position:relative;z-index:1}.hero-title em{color:var(--yellow);font-style:normal}
+.hero-sub{font-size:.85rem;color:var(--cream-dim);margin-top:1.2rem;letter-spacing:.1em;position:relative;z-index:1}
+
+/* SECTION */
+.section{padding:65px 5vw 20px;scroll-margin-top:118px}
+.section-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem}
+.section-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(2.5rem,8vw,5rem);text-transform:uppercase;line-height:.88;color:var(--cream)}
+.section-title em{color:var(--yellow);font-style:normal}
+.section-line{flex:1;height:2px;background:linear-gradient(90deg,var(--yellow),transparent)}
+.sub-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.3rem;text-transform:uppercase;color:var(--yellow);margin:2rem 0 1.2rem;display:flex;align-items:center;gap:1rem;letter-spacing:.05em}.sub-title::after{content:'';flex:1;height:1px;background:rgba(200,129,58,.3)}
+.section-note{font-family:'Lato',sans-serif;font-size:.8rem;font-style:italic;color:rgba(200,129,58,.7);text-align:center;margin:-1rem 0 1.8rem;padding:.8rem;border-bottom:1px solid rgba(200,129,58,.2)}
+
+/* PIZZA GRID */
+.pizza-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;background:transparent;border:none;margin-bottom:2rem}
+@media(max-width:600px){.pizza-grid{grid-template-columns:1fr 1fr;gap:8px}}
+.pizza-card{background:var(--bg2);border:1px solid rgba(200,129,58,.2);border-left:4px solid var(--yellow);padding:1.2rem 1.4rem 1.4rem;display:flex;flex-direction:column;gap:.6rem;transition:background .2s,border-color .2s,transform .15s;position:relative;overflow:hidden;cursor:default;border-radius:2px}
+.pizza-card:hover{background:#e0d6c4;border-color:rgba(200,129,58,.6);transform:translateY(-2px)}
+@media(max-width:600px){.pizza-card{padding:.75rem .8rem 1rem;gap:.4rem}}
+@media(max-width:600px){.pizza-name{font-size:.95rem}}
+@media(max-width:600px){.pizza-price{font-size:1.2rem}}
+.pizza-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.35rem;text-transform:uppercase;color:var(--red);line-height:1;letter-spacing:.03em;padding-bottom:.55rem;border-bottom:1px solid rgba(200,129,58,.25)}
+@media(max-width:600px){.pizza-name{font-size:1.15rem}}
+.pizza-desc{font-family:'Lato',sans-serif;font-size:.78rem;line-height:1.55;color:rgba(44,31,20,.6);font-style:italic}
+.pizza-ingredients{display:flex;flex-wrap:wrap;gap:.3rem}
+.ing{font-family:'Lato',sans-serif;font-size:.72rem;font-weight:400;color:rgba(44,31,20,.7);padding:0}
+.ing::after{content:'·';margin-left:.3rem;color:rgba(200,129,58,.5)}.ing:last-child::after{content:''}
+.pizza-price{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.6rem;color:var(--red);line-height:1;margin-top:.4rem;padding-top:.5rem;border-top:1px solid rgba(200,129,58,.2)}
+@media(max-width:600px){.pizza-price{font-size:1.4rem}}
+
+/* LIST ITEMS */
+.list-section{margin-bottom:2.5rem}
+.list-subsection{margin-bottom:1.8rem}
+.list-header{display:flex;justify-content:space-between;align-items:baseline;padding:.5rem 0;border-bottom:2px solid var(--yellow);margin-bottom:.8rem}
+.list-header-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.6rem;text-transform:uppercase;color:var(--red)}
+.list-header-price{font-family:'Lato',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(44,31,20,.4)}
+.list-item{display:flex;align-items:baseline;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(200,129,58,.12);gap:.5rem}
+.list-item:last-child{border-bottom:none}
+.list-item--with-desc{flex-direction:column;align-items:stretch;gap:.15rem;padding:.65rem 0}
+.list-item-top{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;width:100%}
+.list-name{font-family:'Lato',sans-serif;font-size:.88rem;color:rgba(44,31,20,.85)}
+.list-dots{flex:1;border-bottom:1px dotted rgba(200,129,58,.3);margin:0 .5rem;position:relative;top:-.25em}
+.list-price{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.05rem;color:var(--red);white-space:nowrap}
+.list-price .secondary{font-size:.85rem;color:var(--cream-dim);margin-left:.3rem}
+.list-desc{font-family:'Lato',sans-serif;font-size:.7rem;font-style:italic;color:rgba(44,31,20,.45);line-height:1.35}
+
+/* AGGIUNTE */
+.aggiunte-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5px;background:rgba(200,129,58,.1);border:1px solid rgba(200,129,58,.2);margin-bottom:2rem}
+.aggiunta-item{background:var(--bg2);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:background .2s}.aggiunta-item:hover{background:#ddd0ba}
+.aggiunta-name{font-family:'Lato',sans-serif;font-size:.88rem;color:rgba(44,31,20,.85)}
+.aggiunta-price{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.2rem;color:var(--yellow);flex-shrink:0}
+
+/* SPECIAL BOX */
+.special-box{background:rgba(200,129,58,.08);border:2px solid rgba(200,129,58,.4);padding:1.5rem 1.8rem;margin:1rem 0 2rem;position:relative;overflow:hidden}
+.special-box::before{content:'★';position:absolute;right:1rem;top:.5rem;font-size:3rem;color:rgba(200,129,58,.12);line-height:1}
+.special-box-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.6rem;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
+.special-box-price{font-family:'Oswald',sans-serif;font-weight:700;font-size:2.2rem;color:var(--yellow);float:right;margin-top:-.3rem}
+.special-box-desc{font-size:.82rem;line-height:1.7;color:rgba(44,31,20,.65);clear:both}
+
+/* DELIVERY BOX */
+.delivery-box{background:#3e2618;color:#f5f0e8;padding:2rem 5vw;text-align:center;margin:3rem 0;border-top:3px solid var(--yellow);border-bottom:3px solid var(--yellow)}
+.delivery-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:2rem;text-transform:uppercase;letter-spacing:.06em}
+.delivery-info{font-family:'Lato',sans-serif;font-size:1rem;margin-top:.5rem;font-weight:700}
+.delivery-tel{font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;letter-spacing:.04em;margin-top:.4rem;color:var(--yellow)}
+
+/* ALLERGIE */
+.allergie{background:rgba(200,129,58,.06);border:1px solid rgba(200,129,58,.15);padding:1.8rem;margin:0 0 4rem;text-align:center}
+.allergie p{font-size:.82rem;line-height:1.75;color:rgba(44,31,20,.45)}
+
+/* FOOTER */
+footer{background:#3e2618;padding:36px 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:2px solid var(--yellow)}
+.fcp{font-size:.68rem;color:rgba(245,240,232,.4)}
+.fleg{display:flex;gap:1.2rem}.fleg a{font-size:.68rem;color:rgba(245,240,232,.4);text-decoration:none}.fleg a:hover{color:var(--yellow)}
+
+/* ANIMATIONS */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}.rv.on{opacity:1;transform:translateY(0)}.rv1{transition-delay:.06s}.rv2{transition-delay:.12s}.rv3{transition-delay:.18s}.rv4{transition-delay:.24s}
+
+/* FILTER */
+.filter-fab{position:fixed;bottom:1.5rem;left:1.5rem;z-index:350;width:50px;height:50px;background:var(--red);border:2px solid var(--yellow);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;box-shadow:0 4px 20px rgba(0,0,0,.5);transition:background .2s,transform .2s}.filter-fab:hover{background:var(--yellow);transform:scale(1.08)}.filter-fab:hover svg{stroke:var(--red)}.filter-badge{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--yellow);color:var(--red);font-family:'Oswald',sans-serif;font-size:.6rem;font-weight:700;display:none;align-items:center;justify-content:center}.filter-badge.show{display:flex}
+
+.filter-overlay{position:fixed;inset:0;z-index:399;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s}.filter-overlay.show{opacity:1;pointer-events:all}
+
+.filter-panel{position:fixed;bottom:0;left:0;right:0;z-index:400;background:#f5f0e8;border-top:2px solid var(--yellow);padding:1.4rem 5vw 2rem;transform:translateY(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);max-height:85vh;overflow-y:auto}.filter-panel.open{transform:translateY(0)}
+
+.filter-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.filter-panel-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.3rem;text-transform:uppercase;color:var(--red)}
+.filter-mode-hint{font-family:'Lato',sans-serif;font-size:.68rem;color:rgba(44,31,20,.4);font-style:italic;margin-top:.15rem}
+.filter-close{background:none;border:none;cursor:pointer;color:rgba(44,31,20,.4);transition:color .2s;padding:.3rem}.filter-close:hover{color:var(--cream)}
+
+.filter-cat-block{margin-bottom:1rem}
+.filter-cat-label{font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}.filter-cat-label::after{content:'';flex:1;height:1px;background:rgba(200,129,58,.3)}
+.filter-cat-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+
+.filter-ing-btn{font-family:'Lato',sans-serif;font-size:.7rem;font-weight:700;border:1px solid rgba(200,129,58,.3);background:rgba(200,129,58,.08);color:rgba(44,31,20,.6);padding:.35rem .8rem;cursor:pointer;border-radius:20px;transition:background .15s,color .15s,border-color .15s,transform .1s;white-space:nowrap}.filter-ing-btn:hover{border-color:rgba(200,129,58,.6);color:var(--red)}.filter-ing-btn.selected{background:var(--yellow);color:#fff;border-color:var(--yellow);font-weight:700;transform:scale(1.05)}
+
+.filter-selected-bar{min-height:2rem;display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:.8rem 0;padding:.7rem;background:rgba(200,129,58,.08);border:1px solid rgba(200,129,58,.2);border-radius:4px}.filter-selected-bar-label{font-family:'Lato',sans-serif;font-size:.65rem;color:rgba(44,31,20,.4);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}.filter-selected-chip{font-family:'Lato',sans-serif;font-size:.7rem;font-weight:700;background:var(--yellow);color:#fff;padding:.2rem .6rem;border-radius:12px;display:flex;align-items:center;gap:.3rem}.filter-selected-chip button{background:none;border:none;cursor:pointer;color:#fff;font-size:.8rem;line-height:1;padding:0;margin-left:.1rem;opacity:.7}.filter-selected-chip button:hover{opacity:1}
+.filter-empty-hint{font-family:'Lato',sans-serif;font-size:.72rem;color:rgba(44,31,20,.3);font-style:italic}
+
+.filter-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:.4rem}
+.filter-search-btn{font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--yellow);color:#fff;border:none;padding:.75rem 2rem;cursor:pointer;border-radius:3px;transition:background .2s}.filter-search-btn:hover{background:var(--yellow-dark)}
+.filter-reset-btn{font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:rgba(44,31,20,.4);border:1px solid rgba(44,31,20,.2);padding:.75rem 1.4rem;cursor:pointer;border-radius:3px;transition:color .2s,border-color .2s}.filter-reset-btn:hover{color:var(--red);border-color:rgba(44,31,20,.5)}
+.filter-result-count{font-family:'Lato',sans-serif;font-size:.72rem;color:rgba(44,31,20,.45);margin-left:auto;font-style:italic}
+
+.pizza-card.filtered-out{display:none}
+.pizza-grid.all-hidden{display:none}
+.filter-no-results{display:none;text-align:center;padding:2rem;font-family:'Oswald',sans-serif;font-size:1.1rem;color:rgba(44,31,20,.3);text-transform:uppercase;letter-spacing:.1em}
+.filter-no-results.show{display:block}
+.scroll-top svg,
+.filter-fab svg {
+  stroke: #f5f0e8; /* oppure white */
+}
+</style>
+</head>
+<body>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<nav>
+  <a href="#" class="nav-logo">UÀ <span>Art&amp;Pizza</span></a>
+  <a href="tel:3440310454" class="nav-call">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Chiama ora
+  </a>
+</nav>
+
+<div class="cat-nav">
+  <a href="#friggitoria" class="cat-pill">Friggitoria</a>
+  <a href="#classici" class="cat-pill">I Classici</a>
+  <a href="#amici" class="cat-pill">Le Amici</a>
+  <a href="#artistiche" class="cat-pill">Le Artistiche</a>
+  <a href="#dante" class="cat-pill">Pizze di Dante</a>
+  <a href="#calzoni" class="cat-pill">Calzoni Fritti</a>
+  <a href="#focacce" class="cat-pill">Focacce</a>
+  <a href="#dolcezze" class="cat-pill">Dolcezze</a>
+  <a href="#bevande" class="cat-pill">Bevande</a>
+  <a href="#aggiunte" class="cat-pill">Aggiunte</a>
+</div>
+
+<div class="hero-spacer"></div>
+<div class="hero">
+  <div class="hero-logo-wrap">
+    <!-- Inserisci qui il logo: src="logo.png" -->
+    <img class="hero-logo" src="logo.png" alt="Uà Art&Pizza Logo" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-tag">Uà Art&Pizza · Ravenna</div>
+  <h1 class="hero-title">IL NOSTRO<br><em>MENU</em></h1>
+  <p class="hero-sub">Via Giuseppe Vitale 6 · Ravenna</p>
+</div>
+
+<!-- FRIGGITORIA -->
+<section class="section" id="friggitoria">
+  <div class="section-header rv"><h2 class="section-title">FRIGGI<em>TORIA</em></h2><div class="section-line"></div></div>
+  <p class="section-note rv">Friggitoria Artigianale</p>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">Montanara Pecorino</div>
+      <div class="pizza-desc">Un quartino di pizza fritto e condito</div>
+      <div class="pizza-ingredients">
+        <span class="ing">Pomodoro</span><span class="ing">Pecorino</span><span class="ing">Basilico</span>
+      </div>
+      <div class="pizza-price">2,50€ <span style="font-size:1rem;color:var(--cream-dim)">al pezzo</span></div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Montanara Acciuga</div>
+      <div class="pizza-desc">Un quartino di pizza fritto e condito</div>
+      <div class="pizza-ingredients">
+        <span class="ing">Pomodoro</span><span class="ing">Olive Leccino</span><span class="ing">Acciughe</span><span class="ing">Basilico</span>
+      </div>
+      <div class="pizza-price">2,50€ <span style="font-size:1rem;color:var(--cream-dim)">al pezzo</span></div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Fiori di Zucca</div>
+      <div class="pizza-desc">Ripieno di ricotta di bufala</div>
+      <div class="pizza-ingredients">
+        <span class="ing">Ricotta di Bufala</span>
+      </div>
+      <div class="pizza-price">2,50€ <span style="font-size:1rem;color:var(--cream-dim)">al pezzo</span></div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Crocchè di Patate</div>
+      <div class="pizza-desc">Ripieno di mozzarella</div>
+      <div class="pizza-ingredients">
+        <span class="ing">Mozzarella</span><span class="ing">Patate</span>
+      </div>
+      <div class="pizza-price">2,50€ <span style="font-size:1rem;color:var(--cream-dim)">al pezzo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- I GRANDI CLASSICI -->
+<section class="section" id="classici">
+  <div class="section-header rv"><h2 class="section-title">I GRANDI<br><em>CLASSICI</em></h2><div class="section-line"></div></div>
+  <p class="section-note rv">Tutte le pizze vengono condite con olio extra vergine di oliva e basilico</p>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">Schiacciatina Bianca</div>
+      <div class="pizza-ingredients"><span class="ing">Olio</span><span class="ing">Rosmarino</span></div>
+      <div class="pizza-price">3,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Schiacciatina Macchiata</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Olio</span><span class="ing">Rosmarino</span></div>
+      <div class="pizza-price">3,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Marinara</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Olio all'Aglio</span><span class="ing">Pomodorini</span><span class="ing">Origano</span></div>
+      <div class="pizza-price">5,50€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Biancaneve</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span></div>
+      <div class="pizza-price">6,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Margherita</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span></div>
+      <div class="pizza-price">6,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Parmigiana</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Prosciutto Cotto</span><span class="ing">Melanzane Fritte</span><span class="ing">Grana</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Diavola</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Salame Piccante</span><span class="ing">Olive Leccino</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">4 Stagioni</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Salsiccia</span><span class="ing">Prosciutto Cotto</span><span class="ing">Carciofi</span><span class="ing">Funghi Freschi</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Capricciosa</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Salsiccia</span><span class="ing">Prosciutto Cotto</span><span class="ing">Carciofi</span><span class="ing">Olive Leccino</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Trevigiana</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Radicchio</span><span class="ing">Pancetta</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">4 Formaggi</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Gorgonzola</span><span class="ing">Provola</span><span class="ing">Grana</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Salsiccia e Friarielli</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Friarielli</span><span class="ing">Salsiccia</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Napoli</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Olive Leccino</span><span class="ing">Acciughe</span><span class="ing">Capperi</span><span class="ing">Origano</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Romana</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Bufala</span><span class="ing">Acciughe</span><span class="ing">Capperi</span><span class="ing">Origano</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Trentina</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Porcini</span><span class="ing">Rucola</span><span class="ing">Speck</span><span class="ing">Grana</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Sbrino</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Gorgonzola</span><span class="ing">Melanzane Fritte</span><span class="ing">Prosciutto Crudo</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Tropea</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Tonno</span><span class="ing">Cipolla di Tropea</span></div>
+      <div class="pizza-price">8,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Lady Margherita</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Bufala</span><span class="ing">Basilico in Cottura</span></div>
+      <div class="pizza-price">8,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Ortolana</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Peperoni</span><span class="ing">Melanzane</span><span class="ing">Zucchine</span><span class="ing">Funghi Freschi</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Patatona</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Patate al Forno</span><span class="ing">Salsiccia</span></div>
+      <div class="pizza-price">8,50€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Giulia</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Zucca</span><span class="ing">Fior di Latte</span><span class="ing">Crudo</span><span class="ing">Burrata</span><span class="ing">Nocciole Tostate</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- LE PIZZE DEGLI AMICI -->
+<section class="section" id="amici">
+  <div class="section-header rv"><h2 class="section-title">LE PIZZE<br><em>DEGLI AMICI</em></h2><div class="section-line"></div></div>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">Casabona</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Friarielli</span><span class="ing">Provola</span><span class="ing">'Nduja</span><span class="ing">Pomodorini in Uscita</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Samy</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Zucca</span><span class="ing">Fior di Latte</span><span class="ing">Salame Piccante</span><span class="ing">Porcini</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Beatrice</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Carciofi</span><span class="ing">Fior di Latte</span><span class="ing">Burrata</span><span class="ing">Lardo di Patanegra</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Fiori di Zucca</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Zucca</span><span class="ing">Fior di Latte</span><span class="ing">Provola</span><span class="ing">Fiori di Zucca</span><span class="ing">Pancetta</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">9,50€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Tartufata</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Tartufo</span><span class="ing">Fior di Latte</span><span class="ing">Porcini</span><span class="ing">Grana in Uscita</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Ginevra</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Fiori di Zucca</span><span class="ing">Olive</span><span class="ing">Ricotta di Bufala</span><span class="ing">Acciughe Cantabrico</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Re Carlo</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Melanzane Fritte</span><span class="ing">Salsiccia</span><span class="ing">Olio all'Aglio</span><span class="ing">Pomodorini</span><span class="ing">Rucola</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Gigi</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Tartufo</span><span class="ing">Fior di Latte</span><span class="ing">Salsiccia</span><span class="ing">Melanzane Fritte</span><span class="ing">Grana in Cottura</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Novalli</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Zucca</span><span class="ing">Fior di Latte</span><span class="ing">Pancetta</span><span class="ing">Burrata in Uscita</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Bonnie</div>
+      <div class="pizza-ingredients"><span class="ing">Pecorino</span><span class="ing">Fior di Latte</span><span class="ing">Pancetta</span><span class="ing">Porcini</span><span class="ing">Burrata</span><span class="ing">Pistacchi</span></div>
+      <div class="pizza-price">11,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">La Diva</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Radicchio</span><span class="ing">Salsiccia</span><span class="ing">Gorgonzola</span><span class="ing">Nocciole Tostate</span></div>
+      <div class="pizza-price">9,50€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Regina del Sud</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Zucchine</span><span class="ing">Peperoni</span><span class="ing">Melanzane Fritte</span><span class="ing">Ricotta di Bufala</span><span class="ing">Grana</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Sfera</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Carciofi</span><span class="ing">Fior di Latte</span><span class="ing">Salame Piccante</span><span class="ing">Pecorino</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- LE ARTISTICHE -->
+<section class="section" id="artistiche">
+  <div class="section-header rv"><h2 class="section-title">LE<br><em>ARTISTICHE</em></h2><div class="section-line"></div></div>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">La Botticella</div>
+      <div class="pizza-desc">Bordo ripieno di ricotta di bufala</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Mortadella</span><span class="ing">Burrata</span><span class="ing">Pistacchi</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Raffaella</div>
+      <div class="pizza-desc">Bordo ripieno di ricotta e porcini</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Rucola</span><span class="ing">Prosciutto Crudo</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">L'Art&amp; Pizza</div>
+      <div class="pizza-desc">Bordo ripieno di ricotta e tartufo</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Lardo di Patanegra</span><span class="ing">Burrata</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">12,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">La Bernina</div>
+      <div class="pizza-desc">Metà calzone e metà pizza · Ripieno di gorgonzola e provola</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Carciofi</span><span class="ing">Fior di Latte</span><span class="ing">Speck in Cottura</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">11,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- LE PIZZE DI DANTE -->
+<section class="section" id="dante">
+  <div class="section-header rv"><h2 class="section-title">LE PIZZE<br><em>DI DANTE</em></h2><div class="section-line"></div></div>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">Inferno</div>
+      <div class="pizza-ingredients"><span class="ing">Pomodoro</span><span class="ing">Fior di Latte</span><span class="ing">Peperoni</span><span class="ing">Gorgonzola</span><span class="ing">Cipolla</span><span class="ing">'Nduja</span><span class="ing">Salame Piccante</span></div>
+      <div class="pizza-price">11,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Purgatorio</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Zucchine</span><span class="ing">Speck in Cottura</span><span class="ing">Burrata</span><span class="ing">Nocciole Tostate</span><span class="ing">Pomodorini</span></div>
+      <div class="pizza-price">11,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Paradiso</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Pecorino</span><span class="ing">Porcini</span><span class="ing">Lardo di Patanegra</span><span class="ing">Pomodorini</span><span class="ing">Pepe in Grani</span></div>
+      <div class="pizza-price">11,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">La Divina Commedia</div>
+      <div class="pizza-desc">Fantasia del pizzaiolo</div>
+      <div class="pizza-price">12,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- CALZONI FRITTI -->
+<section class="section" id="calzoni">
+  <div class="section-header rv"><h2 class="section-title">CALZONI<br><em>FRITTI</em></h2><div class="section-line"></div></div>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">Mascalzone</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Salsiccia</span><span class="ing">Friarielli</span><span class="ing">Provola</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Classico</div>
+      <div class="pizza-ingredients"><span class="ing">Ricotta di Bufala</span><span class="ing">Provola</span><span class="ing">Salame Piccante</span><span class="ing">Fior di Latte</span><span class="ing">Pomodoro</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">Parmigiano</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Cotto</span><span class="ing">Melanzane Fritte</span><span class="ing">Grana</span></div>
+      <div class="pizza-price">9,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- LE FOCACCE -->
+<section class="section" id="focacce">
+  <div class="section-header rv"><h2 class="section-title">LE<br><em>FOCACCE</em></h2><div class="section-line"></div></div>
+  <div class="pizza-grid rv">
+    <div class="pizza-card">
+      <div class="pizza-name">La Salsiccia e Friarielli</div>
+      <div class="pizza-ingredients"><span class="ing">Fior di Latte</span><span class="ing">Salsiccia</span><span class="ing">Friarielli</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">La Tartufona</div>
+      <div class="pizza-ingredients"><span class="ing">Crema di Tartufo</span><span class="ing">Patate</span><span class="ing">Gorgonzola</span><span class="ing">Fior di Latte</span><span class="ing">Speck</span><span class="ing">Funghi Freschi</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+    <div class="pizza-card">
+      <div class="pizza-name">La Mortadella</div>
+      <div class="pizza-ingredients"><span class="ing">Bufala</span><span class="ing">Mortadella</span><span class="ing">Pistacchi</span></div>
+      <div class="pizza-price">10,00€</div>
+    </div>
+  </div>
+</section>
+
+<!-- LE DOLCEZZE -->
+<section class="section" id="dolcezze">
+  <div class="section-header rv"><h2 class="section-title">LE<br><em>DOLCEZZE</em></h2><div class="section-line"></div></div>
+  <div class="list-section rv">
+    <div class="list-item">
+      <span class="list-name">Cannoli Siciliani</span>
+      <span class="list-dots"></span>
+      <span class="list-price">4,00€ <span class="secondary">al pezzo</span></span>
+    </div>
+    <div class="list-item">
+      <span class="list-name">Schiacciatina alla Nutella</span>
+      <span class="list-dots"></span>
+      <span class="list-price">6,00€</span>
+    </div>
+  </div>
+</section>
+
+<!-- BEVANDE -->
+<section class="section" id="bevande">
+  <div class="section-header rv"><h2 class="section-title">BEVANDE</h2><div class="section-line"></div></div>
+  <div class="list-section rv">
+    <div class="list-subsection">
+      <div class="list-header"><span class="list-header-name">Acqua &amp; Bibite</span></div>
+      <div class="list-item"><span class="list-name">Acqua Naturale / Frizzante 0,5lt</span><span class="list-dots"></span><span class="list-price">1,00€</span></div>
+      <div class="list-item"><span class="list-name">Coca Cola / Coca Zero 33cl</span><span class="list-dots"></span><span class="list-price">2,50€</span></div>
+      <div class="list-item"><span class="list-name">Coca Cola 1,5lt</span><span class="list-dots"></span><span class="list-price">4,00€</span></div>
+    </div>
+    <div class="list-subsection">
+      <div class="list-header"><span class="list-header-name">Birre</span></div>
+      <div class="list-item"><span class="list-name">Moretti 66cl</span><span class="list-dots"></span><span class="list-price">5,00€</span></div>
+      <div class="list-item"><span class="list-name">Ichnusa Non Filtrata 50cl</span><span class="list-dots"></span><span class="list-price">5,00€</span></div>
+      <div class="list-item"><span class="list-name">Messina Cristalli Sale 50cl</span><span class="list-dots"></span><span class="list-price">5,00€</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGGIUNTE E VARIAZIONI -->
+<section class="section" id="aggiunte">
+  <div class="section-header rv"><h2 class="section-title">AGGIUNTE &amp;<br><em>VARIAZIONI</em></h2><div class="section-line"></div></div>
+  <div class="aggiunte-grid rv">
+    <div class="aggiunta-item"><span class="aggiunta-name">Pizza Baby</span><span class="aggiunta-price">-0,50€</span></div>
+    <div class="aggiunta-item"><span class="aggiunta-name">Impasto Speciale</span><span class="aggiunta-price">+2,00€</span></div>
+    <div class="aggiunta-item"><span class="aggiunta-name">Doppio Impasto Pizza Stesa</span><span class="aggiunta-price">+2,00€</span></div>
+    <div class="aggiunta-item"><span class="aggiunta-name">Verdure</span><span class="aggiunta-price">+1,00€</span></div>
+    <div class="aggiunta-item"><span class="aggiunta-name">Provola, Grana, Salsiccia</span><span class="aggiunta-price">+1,50€</span></div>
+    <div class="aggiunta-item"><span class="aggiunta-name">Affettati, Creme, Porcini, Burrata, Ricotta, Gorgonzola</span><span class="aggiunta-price">+2,00€</span></div>
+  </div>
+  <div class="special-box rv">
+    <span class="special-box-price">da 12,00€</span>
+    <div class="special-box-name">Pizze Maxi 45cm</div>
+    <p class="special-box-desc">A seconda degli ingredienti scelti. Possibilità di personalizzare la pizza con ingredienti aggiuntivi a richiesta.</p>
+  </div>
+  <div class="section-note rv" style="margin-top:0">I prodotti selezionati e usati nella nostra cucina sono di provenienza italiana e di 1ª qualità · <strong>Farine Molino Grassi</strong> — tutte le farine usate sono state selezionate con cura da noi.</div>
+</section>
+
+<div class="delivery-box">
+  <div class="delivery-title">🛵 Consegna a Domicilio</div>
+  <div class="delivery-info">Costo consegna: 1,50€</div>
+  <div class="delivery-tel">344 0310454</div>
+</div>
+
+<div class="allergie" style="margin:0 5vw 4rem">
+  <p>La gentile clientela è invitata a segnalare eventuali allergie o intolleranze.<br>Il personale sarà lieto di fornire indicazioni sugli ingredienti utilizzati.</p>
+</div>
+
+<footer>
+  <span class="fcp">© 2026 Uà Art&Pizza · Ravenna</span>
+  <div class="fleg"><a href="#">Home</a></div>
+</footer>
+
+<div class="filter-overlay" id="filterOverlay"></div>
+<button class="filter-fab" id="filterFab" title="Filtra ingredienti">
+  <span class="filter-badge" id="filterBadge">0</span>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+</button>
+<div class="filter-panel" id="filterPanel">
+  <div class="filter-panel-header">
+    <div>
+      <div class="filter-panel-title">Filtra Pizze</div>
+      <div class="filter-mode-hint">Seleziona più ingredienti → solo le pizze che li hanno tutti</div>
+    </div>
+    <button class="filter-close" id="filterClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- BASE -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Base</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="pomodoro">Pomodoro</button>
+      <button class="filter-ing-btn" data-ing="fior di latte">Mozzarella / Fior di Latte</button>
+      <button class="filter-ing-btn" data-ing="bufala">Bufala</button>
+      <button class="filter-ing-btn" data-ing="crema di tartufo">Tartufo</button>
+      <button class="filter-ing-btn" data-ing="crema di carciofi">Crema di Carciofi</button>
+      <button class="filter-ing-btn" data-ing="crema di zucca">Crema di Zucca</button>
+    </div>
+  </div>
+
+  <!-- LATTICINI -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Latticini</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="gorgonzola">Gorgonzola</button>
+      <button class="filter-ing-btn" data-ing="provola">Provola</button>
+      <button class="filter-ing-btn" data-ing="pecorino">Pecorino</button>
+      <button class="filter-ing-btn" data-ing="grana">Grana</button>
+      <button class="filter-ing-btn" data-ing="burrata">Burrata</button>
+      <button class="filter-ing-btn" data-ing="ricotta">Ricotta</button>
+    </div>
+  </div>
+
+  <!-- CARNE -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Carne &amp; Salumi</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="salsiccia">Salsiccia</button>
+      <button class="filter-ing-btn" data-ing="prosciutto cotto">Prosciutto Cotto</button>
+      <button class="filter-ing-btn" data-ing="crudo">Prosciutto Crudo</button>
+      <button class="filter-ing-btn" data-ing="pancetta">Pancetta</button>
+      <button class="filter-ing-btn" data-ing="speck">Speck</button>
+      <button class="filter-ing-btn" data-ing="salame piccante">Salame Piccante</button>
+      <button class="filter-ing-btn" data-ing="'nduja">'Nduja</button>
+      <button class="filter-ing-btn" data-ing="mortadella">Mortadella</button>
+      <button class="filter-ing-btn" data-ing="lardo">Lardo Patanegra</button>
+    </div>
+  </div>
+
+  <!-- VERDURE -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Verdure</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="porcini">Funghi / Porcini</button>
+      <button class="filter-ing-btn" data-ing="melanzane">Melanzane</button>
+      <button class="filter-ing-btn" data-ing="zucchine">Zucchine</button>
+      <button class="filter-ing-btn" data-ing="peperoni">Peperoni</button>
+      <button class="filter-ing-btn" data-ing="carciofi">Carciofi</button>
+      <button class="filter-ing-btn" data-ing="radicchio">Radicchio</button>
+      <button class="filter-ing-btn" data-ing="friarielli">Friarielli</button>
+      <button class="filter-ing-btn" data-ing="rucola">Rucola</button>
+      <button class="filter-ing-btn" data-ing="pomodorini">Pomodorini</button>
+    </div>
+  </div>
+
+  <!-- PESCE -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Pesce</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="acciughe">Acciughe</button>
+      <button class="filter-ing-btn" data-ing="tonno">Tonno</button>
+    </div>
+  </div>
+
+  <!-- ALTRO -->
+  <div class="filter-cat-block">
+    <div class="filter-cat-label">Altro</div>
+    <div class="filter-cat-pills">
+      <button class="filter-ing-btn" data-ing="pistacchi">Pistacchi</button>
+      <button class="filter-ing-btn" data-ing="nocciole">Nocciole</button>
+      <button class="filter-ing-btn" data-ing="olive">Olive</button>
+    </div>
+  </div>
+
+  <!-- SELEZIONE ATTIVA -->
+  <div class="filter-selected-bar" id="filterSelectedBar">
+    <span class="filter-selected-bar-label">Selezionati:</span>
+    <span class="filter-empty-hint" id="filterEmptyHint">nessuno</span>
+  </div>
+
+  <div class="filter-actions">
+    <button class="filter-search-btn" id="filterApply">Cerca</button>
+    <button class="filter-reset-btn" id="filterReset">Reset</button>
+    <span class="filter-result-count" id="filterCount"></span>
+  </div>
+</div>
+
+<script>
+// Reveal on scroll
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Scroll top
+const stb=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>stb.classList.toggle('show',window.scrollY>400),{passive:true});
+
+// Category nav active tracking
+const sections=[...document.querySelectorAll('section[id]')],pills=[...document.querySelectorAll('.cat-pill')],catNavEl=document.querySelector('.cat-nav');
+function getNavOffset(){const n=document.querySelector('nav'),c=document.querySelector('.cat-nav');return(n?n.getBoundingClientRect().height:62)+(c?c.getBoundingClientRect().height:50)+10}
+function scrollPillIntoViewSafe(p){if(!catNavEl||!p)return;const nr=catNavEl.getBoundingClientRect(),pr=p.getBoundingClientRect();if(pr.left>=nr.left&&pr.right<=nr.right)return;catNavEl.scrollLeft+=(pr.left+pr.right)/2-(nr.left+nr.right)/2}
+function setActiveById(id){pills.forEach(p=>p.classList.remove('active'));const a=document.querySelector(`.cat-pill[href="#${id}"]`);if(a){a.classList.add('active');scrollPillIntoViewSafe(a)}}
+let navLock=false,unlockTimer=null;
+function unlockWhenStop(){clearTimeout(unlockTimer);let ly=window.scrollY;(function tick(){clearTimeout(unlockTimer);unlockTimer=setTimeout(()=>{const y=window.scrollY;Math.abs(y-ly)<2?(navLock=false,updateActive()):(ly=y,tick())},160)})()}
+pills.forEach(p=>{p.addEventListener('click',e=>{e.preventDefault();const h=p.getAttribute('href'),t=h?document.querySelector(h):null;if(!t)return;setActiveById(t.id);navLock=true;unlockWhenStop();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-getNavOffset(),behavior:'smooth'})},{passive:false})});
+function updateActive(){if(navLock)return;const o=getNavOffset()+2;let c=null;for(const s of sections)if(s.getBoundingClientRect().top<=o)c=s;if(window.innerHeight+Math.ceil(window.scrollY)>=document.documentElement.scrollHeight)c=sections[sections.length-1];if(c)setActiveById(c.id)}
+let rafP=false;window.addEventListener('scroll',()=>{if(navLock||rafP)return;rafP=true;requestAnimationFrame(()=>{rafP=false;updateActive()})},{passive:true});
+window.addEventListener('resize',updateActive);window.addEventListener('orientationchange',()=>setTimeout(updateActive,200));updateActive();
+
+// Filter — logica AND: mostra solo pizze con TUTTI gli ingredienti selezionati
+(function(){
+  const dc = Array.from(document.querySelectorAll('.pizza-card'));
+  const fab = document.getElementById('filterFab');
+  const panel = document.getElementById('filterPanel');
+  const overlay = document.getElementById('filterOverlay');
+  const badge = document.getElementById('filterBadge');
+  const countEl = document.getElementById('filterCount');
+  const applyBtn = document.getElementById('filterApply');
+  const resetBtn = document.getElementById('filterReset');
+  const stBtn = document.getElementById('scrollTop');
+  const selectedBar = document.getElementById('filterSelectedBar');
+  const emptyHint = document.getElementById('filterEmptyHint');
+
+  let selected = new Set();
+
+  function openPanel(){panel.classList.add('open');overlay.classList.add('show');document.body.style.overflow='hidden';if(stBtn)stBtn.style.display='none'}
+  function closePanel(){panel.classList.remove('open');overlay.classList.remove('show');document.body.style.overflow='';if(stBtn)stBtn.style.display=''}
+
+  // Aggiorna i chip nella barra di selezione
+  function renderChips(){
+    // rimuovi chip esistenti
+    selectedBar.querySelectorAll('.filter-selected-chip').forEach(c=>c.remove());
+    emptyHint.style.display = selected.size === 0 ? 'inline' : 'none';
+    selected.forEach(ing=>{
+      const chip = document.createElement('span');
+      chip.className = 'filter-selected-chip';
+      chip.innerHTML = ing + '<button title="Rimuovi">×</button>';
+      chip.querySelector('button').addEventListener('click',()=>{
+        selected.delete(ing);
+        // deselect il bottone corrispondente
+        panel.querySelectorAll('.filter-ing-btn').forEach(b=>{
+          if(matchIng(b.dataset.ing, ing)) b.classList.remove('selected');
+        });
+        renderChips();
+        updateBadge();
+      });
+      selectedBar.appendChild(chip);
+    });
+  }
+
+  function updateBadge(){
+    badge.textContent = selected.size;
+    selected.size > 0 ? badge.classList.add('show') : badge.classList.remove('show');
+  }
+
+  // Match: il filterVal deve essere contenuto nell'ingrediente della card (o viceversa)
+  // Es: filtro "crudo" trova "Prosciutto Crudo" e "Crudo"
+  // Es: filtro "porcini" trova "Porcini" ma NON "Funghi Freschi"
+  // Es: filtro "grana" trova "Grana", "Grana in Cottura", "Grana in Uscita"
+  // Es: filtro "melanzane" trova "Melanzane Fritte" e "Melanzane"
+  function matchIng(filterVal, cardIng){
+    const f = filterVal.toLowerCase().trim();
+    const c = cardIng.toLowerCase().trim();
+    // Se il filtro è contenuto nella card o viceversa → match
+    if(c.includes(f) || f.includes(c)) return true;
+    // Match per singole parole del filtro (es "fior di latte" → parola "latte" non basta, ma "fior" sì se >3 chars e unica)
+    const fWords = f.split(/\s+/).filter(w => w.length > 3);
+    // Solo se il filtro ha UNA parola lunga significativa, proviamo il match per parola
+    if(fWords.length === 1) return c.includes(fWords[0]);
+    return false;
+  }
+
+  // Click sui bottoni categoria
+  panel.querySelectorAll('.filter-ing-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const val = btn.dataset.ing;
+      if(btn.classList.contains('selected')){
+        btn.classList.remove('selected');
+        selected.delete(val);
+      } else {
+        btn.classList.add('selected');
+        selected.add(val);
+      }
+      renderChips();
+      updateBadge();
+    });
+  });
+
+  // Applica filtro AND
+  applyBtn.addEventListener('click',()=>{
+    if(selected.size === 0){
+      // nessun filtro: mostra tutto
+      dc.forEach(c=>c.classList.remove('filtered-out'));
+      document.querySelectorAll('.pizza-grid').forEach(g=>g.classList.remove('all-hidden'));
+      document.querySelectorAll('section.section').forEach(s=>s.style.display='');
+      countEl.textContent = '';
+      closePanel();
+      return;
+    }
+
+    let cnt = 0;
+    dc.forEach(card=>{
+      const cardIngs = Array.from(card.querySelectorAll('.ing')).map(i=>i.textContent.trim().toLowerCase());
+      // AND: ogni filtro selezionato deve trovare match in almeno un ingrediente della card
+      const allMatch = Array.from(selected).every(filterVal=>
+        cardIngs.some(ci=> matchIng(filterVal, ci))
+      );
+      if(allMatch){card.classList.remove('filtered-out');cnt++;}
+      else{card.classList.add('filtered-out');}
+    });
+
+    document.querySelectorAll('.pizza-grid').forEach(g=>
+      g.classList.toggle('all-hidden', g.querySelectorAll('.pizza-card:not(.filtered-out)').length===0)
+    );
+
+    // Nascondi le sezioni che non hanno nessuna pizza-grid visibile
+    document.querySelectorAll('section.section').forEach(s=>{
+      const grids = s.querySelectorAll('.pizza-grid');
+      if(grids.length === 0){ s.style.display=''; return; } // sezioni senza grid (bevande ecc.) sempre visibili
+      const hasVisible = Array.from(grids).some(g=>!g.classList.contains('all-hidden'));
+      s.style.display = hasVisible ? '' : 'none';
+    });
+
+    countEl.textContent = cnt > 0 ? cnt + (cnt===1?' pizza trovata':' pizze trovate') : 'Nessuna pizza trovata';
+    closePanel();
+  });
+
+  // Reset
+  resetBtn.addEventListener('click',()=>{
+    selected.clear();
+    panel.querySelectorAll('.filter-ing-btn').forEach(b=>b.classList.remove('selected'));
+    renderChips();
+    updateBadge();
+    dc.forEach(c=>c.classList.remove('filtered-out'));
+    document.querySelectorAll('.pizza-grid').forEach(g=>g.classList.remove('all-hidden'));
+    document.querySelectorAll('section.section').forEach(s=>s.style.display='');
+    countEl.textContent='';
+    closePanel();
+  });
+
+  fab.addEventListener('click', openPanel);
+  document.getElementById('filterClose').addEventListener('click', closePanel);
+  overlay.addEventListener('click', closePanel);
+
+  // init
+  renderChips();
+})();
+</script>
+</body>
+</html>
