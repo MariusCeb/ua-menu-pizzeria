@@ -31,6 +31,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:#3e2618;border-bo
 .nav-logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.04em;color:var(--yellow);text-decoration:none;display:flex;align-items:center;gap:.5rem}.nav-logo span{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--yellow-light)}
 .nav-call{font-family:'Oswald',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#f5f0e8;background:var(--yellow);text-decoration:none;display:flex;align-items:center;gap:.45rem;padding:.5rem 1.1rem;border-radius:3px;border:2px solid var(--yellow-dark);transition:background .2s,transform .15s;white-space:nowrap}.nav-call:hover{background:var(--yellow-dark);transform:scale(1.04)}
 
+/* LANG SWITCH */
+.nav-right{display:flex;align-items:center;gap:.55rem}
+.lang-switch{display:flex;gap:3px;background:rgba(245,240,232,.07);border:1px solid rgba(200,129,58,.3);border-radius:5px;padding:3px}
+.lang-btn{font-family:'Oswald',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.04em;color:rgba(245,240,232,.6);background:none;border:none;cursor:pointer;padding:.42rem .68rem;border-radius:4px;transition:background .15s,color .15s}
+.lang-btn:hover{color:#f5f0e8}
+.lang-btn.active{background:var(--yellow);color:#3e2618}
+@media(max-width:560px){nav{padding:0 4vw}.nav-logo{font-size:1.15rem}.nav-logo span{display:none}.nav-call{padding:.5rem .75rem;font-size:.75rem}.lang-btn{font-size:.82rem;padding:.38rem .5rem}}
+@media(max-width:430px){.navcall-txt{display:none}.nav-call{padding:.55rem .65rem}.lang-switch{gap:2px}.lang-btn{font-size:.78rem;padding:.36rem .44rem}}
+
 /* CAT NAV */
 .cat-nav{position:fixed;top:62px;left:0;right:0;z-index:100;background:#5c3d2e;border-bottom:2px solid var(--yellow-dark);padding:.6rem 5vw;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none}.cat-nav::-webkit-scrollbar{display:none}
 .cat-pill{flex-shrink:0;font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.65);text-decoration:none;border:1px solid rgba(245,240,232,.25);padding:.4rem 1rem;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;border-radius:2px}.cat-pill:hover,.cat-pill.active{background:var(--yellow);color:#f5f0e8;border-color:var(--yellow)}
@@ -163,10 +172,19 @@ footer{background:#3e2618;padding:36px 5vw;display:flex;justify-content:space-be
 
 <nav>
   <a href="#" class="nav-logo">UÀ <span>Art&amp;Pizza</span></a>
-  <a href="tel:3440310454" class="nav-call">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-    Chiama ora
-  </a>
+  <div class="nav-right">
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" data-lang="it">IT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+    <a href="tel:3440310454" class="nav-call">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <span class="navcall-txt">Chiama ora</span>
+    </a>
+  </div>
 </nav>
 
 <div class="cat-nav">
@@ -803,6 +821,7 @@ window.addEventListener('resize',updateActive);window.addEventListener('orientat
       dc.forEach(c=>c.classList.remove('filtered-out'));
       document.querySelectorAll('.pizza-grid').forEach(g=>g.classList.remove('all-hidden'));
       document.querySelectorAll('section.section').forEach(s=>s.style.display='');
+      window.__lastFilterCount = null;
       countEl.textContent = '';
       closePanel();
       return;
@@ -831,7 +850,8 @@ window.addEventListener('resize',updateActive);window.addEventListener('orientat
       s.style.display = hasVisible ? '' : 'none';
     });
 
-    countEl.textContent = cnt > 0 ? cnt + (cnt===1?' pizza trovata':' pizze trovate') : 'Nessuna pizza trovata';
+    window.__lastFilterCount = cnt;
+    countEl.textContent = window.i18nCount ? window.i18nCount(cnt) : (cnt > 0 ? cnt + (cnt===1?' pizza trovata':' pizze trovate') : 'Nessuna pizza trovata');
     closePanel();
   });
 
@@ -844,6 +864,7 @@ window.addEventListener('resize',updateActive);window.addEventListener('orientat
     dc.forEach(c=>c.classList.remove('filtered-out'));
     document.querySelectorAll('.pizza-grid').forEach(g=>g.classList.remove('all-hidden'));
     document.querySelectorAll('section.section').forEach(s=>s.style.display='');
+    window.__lastFilterCount = null;
     countEl.textContent='';
     closePanel();
   });
@@ -854,6 +875,269 @@ window.addEventListener('resize',updateActive);window.addEventListener('orientat
 
   // init
   renderChips();
+})();
+</script>
+
+<!-- ===== TRADUZIONI MENU (IT · EN · DE · FR · ES) ===== -->
+<!-- Per aggiungere/correggere una traduzione: trova il testo italiano qui sotto e modifica le 4 lingue. -->
+<!-- I nomi delle pizze restano sempre in italiano (scelta di brand). -->
+<script>
+(function(){
+  const LANGS = ['it','en','de','fr','es'];
+
+  // Dizionario testuale: chiave = testo ITALIANO esatto -> {en, de, fr, es}
+  // Tutto ciò che non è qui resta in italiano (graceful fallback).
+  const D = {
+    // --- Navigazione & categorie ---
+    "Chiama ora":{en:"Call now",de:"Anrufen",fr:"Appeler",es:"Llamar"},
+    "Friggitoria":{en:"Fried",de:"Frittiertes",fr:"Fritures",es:"Fritos"},
+    "I Classici":{en:"The Classics",de:"Die Klassiker",fr:"Les Classiques",es:"Los Clásicos"},
+    "Le Amici":{en:"Friends'",de:"Der Freunde",fr:"Des Amis",es:"De los Amigos"},
+    "Le Artistiche":{en:"The Artistic",de:"Die Künstlerischen",fr:"Les Artistiques",es:"Las Artísticas"},
+    "Pizze di Dante":{en:"Dante's Pizzas",de:"Dantes Pizzen",fr:"Pizzas de Dante",es:"Pizzas de Dante"},
+    "Calzoni Fritti":{en:"Fried Calzoni",de:"Frittierte Calzoni",fr:"Calzoni Frits",es:"Calzoni Fritos"},
+    "Focacce":{en:"Focacce",de:"Focacce",fr:"Focacce",es:"Focacce"},
+    "Dolcezze":{en:"Desserts",de:"Süßes",fr:"Desserts",es:"Postres"},
+    "Bevande":{en:"Drinks",de:"Getränke",fr:"Boissons",es:"Bebidas"},
+    "Aggiunte":{en:"Extras",de:"Extras",fr:"Suppléments",es:"Extras"},
+
+    // --- Note di sezione ---
+    "Friggitoria Artigianale":{en:"Artisan Fried Specialties",de:"Hausgemachtes Frittiertes",fr:"Fritures Artisanales",es:"Fritos Artesanales"},
+    "Tutte le pizze vengono condite con olio extra vergine di oliva e basilico":{en:"All pizzas are finished with extra virgin olive oil and basil",de:"Alle Pizzen werden mit nativem Olivenöl extra und Basilikum verfeinert",fr:"Toutes les pizzas sont assaisonnées d'huile d'olive extra vierge et de basilic",es:"Todas las pizzas se aliñan con aceite de oliva virgen extra y albahaca"},
+    "I prodotti selezionati e usati nella nostra cucina sono di provenienza italiana e di 1ª qualità · Farine Molino Grassi — tutte le farine usate sono state selezionate con cura da noi.":{en:"The products selected and used in our kitchen are of Italian origin and top quality · <strong>Molino Grassi flours</strong> — all the flours we use are carefully selected by us.",de:"Die in unserer Küche ausgewählten und verwendeten Produkte stammen aus Italien und sind von höchster Qualität · <strong>Molino-Grassi-Mehle</strong> — alle verwendeten Mehle wurden von uns sorgfältig ausgewählt.",fr:"Les produits sélectionnés et utilisés dans notre cuisine sont d'origine italienne et de première qualité · <strong>Farines Molino Grassi</strong> — toutes les farines utilisées sont soigneusement sélectionnées par nos soins.",es:"Los productos seleccionados y usados en nuestra cocina son de origen italiano y de primera calidad · <strong>Harinas Molino Grassi</strong> — todas las harinas usadas han sido cuidadosamente seleccionadas por nosotros."},
+
+    // --- Descrizioni pizze ---
+    "Un quartino di pizza fritto e condito":{en:"A quarter of fried, topped pizza",de:"Ein frittiertes, belegtes Viertel Pizza",fr:"Un quart de pizza frite et garnie",es:"Un cuarto de pizza frita y aderezada"},
+    "Ripieno di ricotta di bufala":{en:"Filled with buffalo ricotta",de:"Gefüllt mit Büffelricotta",fr:"Farci à la ricotta de bufflonne",es:"Relleno de ricotta de búfala"},
+    "Ripieno di mozzarella":{en:"Filled with mozzarella",de:"Mit Mozzarella gefüllt",fr:"Farci à la mozzarella",es:"Relleno de mozzarella"},
+    "Bordo ripieno di ricotta di bufala":{en:"Crust filled with buffalo ricotta",de:"Rand gefüllt mit Büffelricotta",fr:"Bord farci à la ricotta de bufflonne",es:"Borde relleno de ricotta de búfala"},
+    "Bordo ripieno di ricotta e porcini":{en:"Crust filled with ricotta and porcini",de:"Rand gefüllt mit Ricotta und Steinpilzen",fr:"Bord farci à la ricotta et aux cèpes",es:"Borde relleno de ricotta y boletus"},
+    "Bordo ripieno di ricotta e tartufo":{en:"Crust filled with ricotta and truffle",de:"Rand gefüllt mit Ricotta und Trüffel",fr:"Bord farci à la ricotta et à la truffe",es:"Borde relleno de ricotta y trufa"},
+    "Metà calzone e metà pizza · Ripieno di gorgonzola e provola":{en:"Half calzone, half pizza · Filled with gorgonzola and provola",de:"Halb Calzone, halb Pizza · Gefüllt mit Gorgonzola und Provola",fr:"Moitié calzone, moitié pizza · Farci au gorgonzola et à la provola",es:"Mitad calzone, mitad pizza · Relleno de gorgonzola y provola"},
+    "Fantasia del pizzaiolo":{en:"Pizzaiolo's choice",de:"Überraschung des Pizzabäckers",fr:"Création du pizzaïolo",es:"Creación del pizzero"},
+
+    // --- Suffissi prezzo ---
+    "al pezzo":{en:"each",de:"pro Stück",fr:"pièce",es:"por pieza"},
+    "da 12,00€":{en:"from 12,00€",de:"ab 12,00€",fr:"dès 12,00€",es:"desde 12,00€"},
+
+    // --- Bevande / Dolcezze (descrittivi; i brand restano invariati) ---
+    "Acqua &amp; Bibite":{en:"Water &amp; Soft Drinks",de:"Wasser &amp; Erfrischungsgetränke",fr:"Eau &amp; Boissons",es:"Agua y Refrescos"},
+    "Acqua & Bibite":{en:"Water & Soft Drinks",de:"Wasser & Erfrischungsgetränke",fr:"Eau & Boissons",es:"Agua y Refrescos"},
+    "Birre":{en:"Beers",de:"Biere",fr:"Bières",es:"Cervezas"},
+    "Acqua Naturale / Frizzante 0,5lt":{en:"Still / Sparkling Water 0,5L",de:"Wasser still / sprudelnd 0,5l",fr:"Eau plate / gazeuse 0,5l",es:"Agua sin gas / con gas 0,5l"},
+    "Cannoli Siciliani":{en:"Sicilian Cannoli",de:"Sizilianische Cannoli",fr:"Cannoli Siciliens",es:"Cannoli Sicilianos"},
+    "Schiacciatina alla Nutella":{en:"Nutella Flatbread",de:"Nutella-Fladen",fr:"Schiacciatina au Nutella",es:"Schiacciatina con Nutella"},
+
+    // --- Aggiunte & variazioni ---
+    "Pizza Baby":{en:"Baby Pizza",de:"Baby-Pizza",fr:"Pizza Enfant",es:"Pizza Pequeña"},
+    "Impasto Speciale":{en:"Special Dough",de:"Spezialteig",fr:"Pâte Spéciale",es:"Masa Especial"},
+    "Doppio Impasto Pizza Stesa":{en:"Double Dough (rolled pizza)",de:"Doppelter Teig (ausgerollt)",fr:"Pâte double (pizza étalée)",es:"Masa doble (pizza estirada)"},
+    "Verdure":{en:"Vegetables",de:"Gemüse",fr:"Légumes",es:"Verduras"},
+    "Provola, Grana, Salsiccia":{en:"Provola, Grana, Sausage",de:"Provola, Grana, Wurst",fr:"Provola, Grana, Saucisse",es:"Provola, Grana, Salchicha"},
+    "Affettati, Creme, Porcini, Burrata, Ricotta, Gorgonzola":{en:"Cold cuts, Creams, Porcini, Burrata, Ricotta, Gorgonzola",de:"Aufschnitt, Cremes, Steinpilze, Burrata, Ricotta, Gorgonzola",fr:"Charcuterie, Crèmes, Cèpes, Burrata, Ricotta, Gorgonzola",es:"Embutidos, Cremas, Boletus, Burrata, Ricotta, Gorgonzola"},
+    "Pizze Maxi 45cm":{en:"Maxi Pizzas 45cm",de:"Maxi-Pizzen 45cm",fr:"Pizzas Maxi 45cm",es:"Pizzas Maxi 45cm"},
+    "A seconda degli ingredienti scelti. Possibilità di personalizzare la pizza con ingredienti aggiuntivi a richiesta.":{en:"Depending on the chosen toppings. The pizza can be customized with extra toppings on request.",de:"Je nach gewählten Zutaten. Die Pizza kann auf Wunsch mit zusätzlichen Zutaten individuell belegt werden.",fr:"Selon les ingrédients choisis. Possibilité de personnaliser la pizza avec des ingrédients supplémentaires sur demande.",es:"Según los ingredientes elegidos. Posibilidad de personalizar la pizza con ingredientes adicionales bajo petición."},
+
+    // --- Consegna ---
+    "🛵 Consegna a Domicilio":{en:"🛵 Home Delivery",de:"🛵 Lieferservice",fr:"🛵 Livraison à Domicile",es:"🛵 Entrega a Domicilio"},
+    "Costo consegna: 1,50€":{en:"Delivery fee: 1,50€",de:"Liefergebühr: 1,50€",fr:"Frais de livraison : 1,50€",es:"Gastos de envío: 1,50€"},
+
+    // --- Pannello filtro ---
+    "Filtra Pizze":{en:"Filter Pizzas",de:"Pizzen filtern",fr:"Filtrer les Pizzas",es:"Filtrar Pizzas"},
+    "Seleziona più ingredienti → solo le pizze che li hanno tutti":{en:"Select multiple ingredients → only pizzas that have them all",de:"Mehrere Zutaten wählen → nur Pizzen mit allen",fr:"Sélectionnez plusieurs ingrédients → seules les pizzas qui les ont toutes",es:"Selecciona varios ingredientes → solo las pizzas que los tienen todos"},
+    "Base":{en:"Base",de:"Basis",fr:"Base",es:"Base"},
+    "Latticini":{en:"Dairy",de:"Milchprodukte",fr:"Produits laitiers",es:"Lácteos"},
+    "Carne & Salumi":{en:"Meat & Cold Cuts",de:"Fleisch & Wurst",fr:"Viande & Charcuterie",es:"Carne y Embutidos"},
+    "Carne &amp; Salumi":{en:"Meat &amp; Cold Cuts",de:"Fleisch &amp; Wurst",fr:"Viande &amp; Charcuterie",es:"Carne y Embutidos"},
+    "Pesce":{en:"Fish",de:"Fisch",fr:"Poisson",es:"Pescado"},
+    "Altro":{en:"Other",de:"Sonstiges",fr:"Autre",es:"Otros"},
+    "Selezionati:":{en:"Selected:",de:"Ausgewählt:",fr:"Sélectionnés :",es:"Seleccionados:"},
+    "nessuno":{en:"none",de:"keine",fr:"aucun",es:"ninguno"},
+    "Cerca":{en:"Search",de:"Suchen",fr:"Rechercher",es:"Buscar"},
+    "Reset":{en:"Reset",de:"Zurücksetzen",fr:"Réinitialiser",es:"Restablecer"},
+    "Home":{en:"Home",de:"Startseite",fr:"Accueil",es:"Inicio"},
+
+    // --- Etichette filtro extra ---
+    "Tartufo":{en:"Truffle",de:"Trüffel",fr:"Truffe",es:"Trufa"},
+    "Prosciutto Crudo":{en:"Cured Ham",de:"Rohschinken",fr:"Jambon cru",es:"Jamón crudo"},
+    "Lardo Patanegra":{en:"Pata Negra Lardo",de:"Pata-Negra-Speck",fr:"Lard de Pata Negra",es:"Tocino de Pata Negra"},
+    "Funghi / Porcini":{en:"Mushrooms / Porcini",de:"Pilze / Steinpilze",fr:"Champignons / Cèpes",es:"Setas / Boletus"},
+
+    // --- Ingredienti ---
+    "Pomodoro":{en:"Tomato",de:"Tomate",fr:"Tomate",es:"Tomate"},
+    "Basilico":{en:"Basil",de:"Basilikum",fr:"Basilic",es:"Albahaca"},
+    "Olive Leccino":{en:"Leccino Olives",de:"Leccino-Oliven",fr:"Olives Leccino",es:"Aceitunas Leccino"},
+    "Acciughe":{en:"Anchovies",de:"Sardellen",fr:"Anchois",es:"Anchoas"},
+    "Ricotta di Bufala":{en:"Buffalo Ricotta",de:"Büffelricotta",fr:"Ricotta de bufflonne",es:"Ricotta de búfala"},
+    "Patate":{en:"Potatoes",de:"Kartoffeln",fr:"Pommes de terre",es:"Patatas"},
+    "Olio":{en:"Oil",de:"Öl",fr:"Huile",es:"Aceite"},
+    "Rosmarino":{en:"Rosemary",de:"Rosmarin",fr:"Romarin",es:"Romero"},
+    "Olio all'Aglio":{en:"Garlic Oil",de:"Knoblauchöl",fr:"Huile d'ail",es:"Aceite de ajo"},
+    "Pomodorini":{en:"Cherry Tomatoes",de:"Kirschtomaten",fr:"Tomates cerises",es:"Tomates cherry"},
+    "Origano":{en:"Oregano",de:"Oregano",fr:"Origan",es:"Orégano"},
+    "Prosciutto Cotto":{en:"Cooked Ham",de:"Kochschinken",fr:"Jambon cuit",es:"Jamón cocido"},
+    "Cotto":{en:"Cooked Ham",de:"Kochschinken",fr:"Jambon cuit",es:"Jamón cocido"},
+    "Melanzane Fritte":{en:"Fried Eggplant",de:"Gebratene Auberginen",fr:"Aubergines frites",es:"Berenjenas fritas"},
+    "Salame Piccante":{en:"Spicy Salami",de:"Scharfe Salami",fr:"Salami piquant",es:"Salami picante"},
+    "Salsiccia":{en:"Sausage",de:"Wurst",fr:"Saucisse",es:"Salchicha"},
+    "Carciofi":{en:"Artichokes",de:"Artischocken",fr:"Artichauts",es:"Alcachofas"},
+    "Funghi Freschi":{en:"Fresh Mushrooms",de:"Frische Pilze",fr:"Champignons frais",es:"Setas frescas"},
+    "Pancetta":{en:"Pancetta",de:"Bauchspeck",fr:"Pancetta",es:"Panceta"},
+    "Capperi":{en:"Capers",de:"Kapern",fr:"Câpres",es:"Alcaparras"},
+    "Bufala":{en:"Buffalo Mozzarella",de:"Büffelmozzarella",fr:"Mozzarella de bufflonne",es:"Mozzarella de búfala"},
+    "Porcini":{en:"Porcini",de:"Steinpilze",fr:"Cèpes",es:"Boletus"},
+    "Rucola":{en:"Rocket",de:"Rucola",fr:"Roquette",es:"Rúcula"},
+    "Tonno":{en:"Tuna",de:"Thunfisch",fr:"Thon",es:"Atún"},
+    "Cipolla di Tropea":{en:"Tropea Onion",de:"Tropea-Zwiebel",fr:"Oignon de Tropea",es:"Cebolla de Tropea"},
+    "Cipolla":{en:"Onion",de:"Zwiebel",fr:"Oignon",es:"Cebolla"},
+    "Basilico in Cottura":{en:"Baked Basil",de:"Mitgebackenes Basilikum",fr:"Basilic en cuisson",es:"Albahaca al horno"},
+    "Peperoni":{en:"Bell Peppers",de:"Paprika",fr:"Poivrons",es:"Pimientos"},
+    "Melanzane":{en:"Eggplant",de:"Auberginen",fr:"Aubergines",es:"Berenjenas"},
+    "Zucchine":{en:"Zucchini",de:"Zucchini",fr:"Courgettes",es:"Calabacín"},
+    "Patate al Forno":{en:"Roast Potatoes",de:"Ofenkartoffeln",fr:"Pommes de terre au four",es:"Patatas al horno"},
+    "Crema di Zucca":{en:"Pumpkin Cream",de:"Kürbiscreme",fr:"Crème de courge",es:"Crema de calabaza"},
+    "Crudo":{en:"Cured Ham",de:"Rohschinken",fr:"Jambon cru",es:"Jamón crudo"},
+    "Nocciole Tostate":{en:"Toasted Hazelnuts",de:"Geröstete Haselnüsse",fr:"Noisettes grillées",es:"Avellanas tostadas"},
+    "Nocciole":{en:"Hazelnuts",de:"Haselnüsse",fr:"Noisettes",es:"Avellanas"},
+    "Pomodorini in Uscita":{en:"Cherry Tomatoes (added after)",de:"Kirschtomaten (zum Schluss)",fr:"Tomates cerises (à la sortie)",es:"Tomates cherry (al final)"},
+    "Crema di Carciofi":{en:"Artichoke Cream",de:"Artischockencreme",fr:"Crème d'artichaut",es:"Crema de alcachofa"},
+    "Lardo di Patanegra":{en:"Pata Negra Lardo",de:"Pata-Negra-Speck",fr:"Lard de Pata Negra",es:"Tocino de Pata Negra"},
+    "Crema di Tartufo":{en:"Truffle Cream",de:"Trüffelcreme",fr:"Crème de truffe",es:"Crema de trufa"},
+    "Grana in Uscita":{en:"Grana (added after)",de:"Grana (zum Schluss)",fr:"Grana (à la sortie)",es:"Grana (al final)"},
+    "Grana in Cottura":{en:"Baked Grana",de:"Mitgebackener Grana",fr:"Grana en cuisson",es:"Grana al horno"},
+    "Grana in Uscita ":{en:"Grana (added after)",de:"Grana (zum Schluss)",fr:"Grana (à la sortie)",es:"Grana (al final)"},
+    "Fiori di Zucca":{en:"Zucchini Flowers",de:"Zucchiniblüten",fr:"Fleurs de courgette",es:"Flores de calabacín"},
+    "Acciughe Cantabrico":{en:"Cantabrian Anchovies",de:"Kantabrische Sardellen",fr:"Anchois de Cantabrie",es:"Anchoas del Cantábrico"},
+    "Olive":{en:"Olives",de:"Oliven",fr:"Olives",es:"Aceitunas"},
+    "Pistacchi":{en:"Pistachios",de:"Pistazien",fr:"Pistaches",es:"Pistachos"},
+    "Burrata in Uscita":{en:"Burrata (added after)",de:"Burrata (zum Schluss)",fr:"Burrata (à la sortie)",es:"Burrata (al final)"},
+    "Speck in Cottura":{en:"Baked Speck",de:"Mitgebackener Speck",fr:"Speck en cuisson",es:"Speck al horno"},
+    "Pepe in Grani":{en:"Peppercorns",de:"Pfefferkörner",fr:"Grains de poivre",es:"Granos de pimienta"},
+    "Friarielli":{en:"Friarielli (broccoli rabe)",de:"Friarielli (Stängelkohl)",fr:"Friarielli (brocoli-rave)",es:"Friarielli (grelos)"},
+    "Mortadella":{en:"Mortadella",de:"Mortadella",fr:"Mortadelle",es:"Mortadela"}
+  };
+
+  // Titoli di sezione (HTML, per id) — i nomi pizze NON cambiano
+  const ST = {
+    friggitoria:{en:'FRIED <em>BITES</em>',de:'FRIT<em>TIERTES</em>',fr:'FRI<em>TURES</em>',es:'FRI<em>TOS</em>'},
+    classici:{en:'THE GREAT<br><em>CLASSICS</em>',de:'DIE GROSSEN<br><em>KLASSIKER</em>',fr:'LES GRANDS<br><em>CLASSIQUES</em>',es:'LOS GRANDES<br><em>CLÁSICOS</em>'},
+    amici:{en:"OUR FRIENDS'<br><em>PIZZAS</em>",de:'PIZZEN<br><em>DER FREUNDE</em>',fr:'LES PIZZAS<br><em>DES AMIS</em>',es:'LAS PIZZAS<br><em>DE LOS AMIGOS</em>'},
+    artistiche:{en:'THE<br><em>ARTISTIC</em>',de:'DIE<br><em>KÜNSTLERISCHEN</em>',fr:'LES<br><em>ARTISTIQUES</em>',es:'LAS<br><em>ARTÍSTICAS</em>'},
+    dante:{en:"DANTE'S<br><em>PIZZAS</em>",de:'DANTES<br><em>PIZZEN</em>',fr:'LES PIZZAS<br><em>DE DANTE</em>',es:'LAS PIZZAS<br><em>DE DANTE</em>'},
+    calzoni:{en:'FRIED<br><em>CALZONI</em>',de:'FRITTIERTE<br><em>CALZONI</em>',fr:'CALZONI<br><em>FRITS</em>',es:'CALZONI<br><em>FRITOS</em>'},
+    focacce:{en:'THE<br><em>FOCACCE</em>',de:'DIE<br><em>FOCACCE</em>',fr:'LES<br><em>FOCACCE</em>',es:'LAS<br><em>FOCACCE</em>'},
+    dolcezze:{en:'OUR<br><em>DESSERTS</em>',de:'UNSER<br><em>SÜSSES</em>',fr:'NOS<br><em>DESSERTS</em>',es:'NUESTROS<br><em>POSTRES</em>'},
+    bevande:{en:'DRINKS',de:'GETRÄNKE',fr:'BOISSONS',es:'BEBIDAS'},
+    aggiunte:{en:'ADD-ONS &amp;<br><em>VARIATIONS</em>',de:'EXTRAS &amp;<br><em>VARIATIONEN</em>',fr:'SUPPLÉMENTS &amp;<br><em>VARIATIONS</em>',es:'EXTRAS &amp;<br><em>VARIACIONES</em>'}
+  };
+
+  // Blocchi HTML singoli (per selettore)
+  const HSEL = {
+    '.hero-title':{en:'OUR<br><em>MENU</em>',de:'UNSER<br><em>MENU</em>',fr:'NOTRE<br><em>MENU</em>',es:'NUESTRO<br><em>MENÚ</em>'},
+    '.allergie p':{
+      en:'Please inform our staff of any allergies or intolerances.<br>We are happy to provide information about the ingredients used.',
+      de:'Bitte informieren Sie unser Personal über Allergien oder Unverträglichkeiten.<br>Wir geben Ihnen gerne Auskunft über die verwendeten Zutaten.',
+      fr:'Merci de signaler toute allergie ou intolérance à notre personnel.<br>Nous serons heureux de vous renseigner sur les ingrédients utilisés.',
+      es:'Rogamos comunicar al personal cualquier alergia o intolerancia.<br>Estaremos encantados de informar sobre los ingredientes utilizados.'
+    }
+  };
+
+  const FAB_TITLE = {it:'Filtra ingredienti',en:'Filter ingredients',de:'Zutaten filtern',fr:'Filtrer les ingrédients',es:'Filtrar ingredientes'};
+
+  // Selettori a solo testo (textContent)
+  const TEXT_SEL = '.cat-pill, .pizza-desc, .ing, .pizza-price > span, .list-price .secondary, .list-header-name, .list-name, .aggiunta-name, .special-box-name, .special-box-desc, .special-box-price, .delivery-title, .delivery-info, .navcall-txt, .filter-panel-title, .filter-mode-hint, .filter-cat-label, .filter-search-btn, .filter-reset-btn, .filter-selected-bar-label, .filter-empty-hint, .filter-ing-btn, footer .fleg a';
+
+  function lookup(key, lang){
+    const e = D[key];
+    return (e && e[lang]) ? e[lang] : null;
+  }
+
+  function applyText(lang){
+    document.querySelectorAll(TEXT_SEL).forEach(el=>{
+      if(el.dataset.i18nSrc === undefined) el.dataset.i18nSrc = el.textContent;
+      const src = el.dataset.i18nSrc.trim();
+      const tr = (lang==='it') ? null : lookup(src, lang);
+      el.textContent = tr || el.dataset.i18nSrc;
+    });
+  }
+
+  function applyHTML(sel, lang){
+    document.querySelectorAll(sel).forEach(el=>{
+      if(el.dataset.i18nHtml === undefined) el.dataset.i18nHtml = el.innerHTML;
+      const src = el.textContent.trim();
+      const tr = (lang==='it') ? null : lookup(src, lang);
+      el.innerHTML = tr || el.dataset.i18nHtml;
+    });
+  }
+
+  function applyTitles(lang){
+    for(const id in ST){
+      const el = document.querySelector('#'+id+' .section-title');
+      if(!el) continue;
+      if(el.dataset.i18nHtml === undefined) el.dataset.i18nHtml = el.innerHTML;
+      const v = ST[id][lang];
+      el.innerHTML = (lang==='it' || !v) ? el.dataset.i18nHtml : v;
+    }
+  }
+
+  function applyHSEL(lang){
+    for(const sel in HSEL){
+      const el = document.querySelector(sel);
+      if(!el) continue;
+      if(el.dataset.i18nHtml === undefined) el.dataset.i18nHtml = el.innerHTML;
+      const v = HSEL[sel][lang];
+      el.innerHTML = (lang==='it' || !v) ? el.dataset.i18nHtml : v;
+    }
+  }
+
+  function setLang(lang){
+    if(LANGS.indexOf(lang) === -1) lang = 'it';
+    window.__lang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    applyText(lang);
+    applyHTML('.section-note', lang);
+    applyTitles(lang);
+    applyHSEL(lang);
+    const fab = document.getElementById('filterFab');
+    if(fab) fab.title = FAB_TITLE[lang] || FAB_TITLE.it;
+    // bottoni lingua attivi
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+    // ri-localizza il conteggio filtro se attivo
+    if(window.__lastFilterCount != null){
+      const c = document.getElementById('filterCount');
+      if(c) c.textContent = window.i18nCount(window.__lastFilterCount);
+    }
+    try{ localStorage.setItem('uaLang', lang); }catch(e){}
+  }
+
+  // Conteggio risultati filtro localizzato (usato anche dallo script del filtro)
+  window.i18nCount = function(n){
+    const L = window.__lang || 'it';
+    const ALL = {
+      it:{one:' pizza trovata',many:' pizze trovate',none:'Nessuna pizza trovata'},
+      en:{one:' pizza found',many:' pizzas found',none:'No pizza found'},
+      de:{one:' Pizza gefunden',many:' Pizzen gefunden',none:'Keine Pizza gefunden'},
+      fr:{one:' pizza trouvée',many:' pizzas trouvées',none:'Aucune pizza trouvée'},
+      es:{one:' pizza encontrada',many:' pizzas encontradas',none:'Ninguna pizza encontrada'}
+    };
+    const M = ALL[L] || ALL.it;
+    if(n > 0) return n + (n===1 ? M.one : M.many);
+    return M.none;
+  };
+
+  // Click sui bottoni lingua
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+
+  // Lingua iniziale: salvata > lingua browser > italiano
+  let initial = null;
+  try{ initial = localStorage.getItem('uaLang'); }catch(e){}
+  if(!initial){
+    const nav = (navigator.language || 'it').slice(0,2).toLowerCase();
+    initial = LANGS.indexOf(nav) !== -1 ? nav : 'it';
+  }
+  setLang(initial);
 })();
 </script>
 </body>
